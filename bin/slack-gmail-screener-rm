@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ -z "$1" ]
+then
+    echo "Usage: slack-gmail-screener-rm <email>" >&2
+    exit 1
+fi
+
+exec curl -X"DELETE" -d"$1" "http://127.0.0.1:48879"

@@ -1,0 +1,11 @@
+#!/bin/sh
+
+set -e
+
+if [ -z "$1" ]
+then
+    echo "Usage: slack-gmail-screener-add <email>" >&2
+    exit 1
+fi
+
+exec curl -d"$1" "http://127.0.0.1:48879"
