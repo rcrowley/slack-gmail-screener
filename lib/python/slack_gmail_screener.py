@@ -201,8 +201,13 @@ class IMAPThread(threading.Thread):
                         message = message + part[1]
                 message = message_from_string(message)
                 header = decode_header(message['From'])
-                email = re.search('<([^>]+)>', header[0][0]).group(1)
+                match = re.search('<([^>]+)>', header[0][0])
+                if match is None:
+                    print('DEBUG header[0][0]: %s' % header[0][0])
+                    continue
+                email = match.group(1)
                 if email in emails:
+                    print('DEBUG uid: %s' % uid)
                     slack_dm(message)
 
 def slack_dm(message):
